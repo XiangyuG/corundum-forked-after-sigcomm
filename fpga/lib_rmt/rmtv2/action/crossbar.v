@@ -186,7 +186,7 @@ always @(posedge clk or negedge rst_n) begin
         		        alu_in_4B_3[(i+1)*width_4B-1 -: width_4B] <= cont_4B[i];
         		        casez(sub_action[8+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
-        		            4'b0001, 4'b0010: begin
+        		            4'b0001, 4'b0010, 4'b0100, 4'b0101, 4'b0110: begin
         		                alu_in_4B_1[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][18:16]];
         		                alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][13:11]];
         		            end
