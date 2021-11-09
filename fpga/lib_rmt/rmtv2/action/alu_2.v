@@ -63,7 +63,7 @@ reg 						ready_out_next;
 // assign load_addr = store_addr[4:0] + base_addr;
 assign load_addr = operand_2_in[4:0] + base_addr;
 
-assign store_din_w = (action_type==4'b1000)?store_din:
+assign store_din_w = (action_type==4'b1000 || action_type==4'b0011)?store_din:
 						((action_type==4'b0111)?(load_data+1):0);
 
 assign container_out_w = (action_type==4'b1011)?load_data:
@@ -82,7 +82,7 @@ assign container_out_w = (action_type==4'b1011)?load_data:
 5: load:      0101
               load data from RAM, write to pkt header according to addr in action.
 
-6. store:     0110
+6. store:     1000
               read data from pkt header, write to ram according to addr in action.
 
 7. loadd:     0111
@@ -146,8 +146,8 @@ always @(*) begin
 		    4'b0110: begin
                         container_out_next = operand_1_in >= operand_2_in;
                     end
-                    //store op (interact with RAM)
-                    4'b1000: begin
+                    //store/storei ops (interact with RAM)
+                    4'b1000, 4'b0011: begin
                         container_out_next = operand_3_in;
                         //store_en_r = 1;
                         store_addr_next = operand_2_in[4:0];
@@ -203,7 +203,7 @@ always @(*) begin
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0111) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
@@ -219,7 +219,7 @@ always @(*) begin
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0111) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
