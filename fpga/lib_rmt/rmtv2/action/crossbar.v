@@ -184,9 +184,9 @@ always @(posedge clk or negedge rst_n) begin
         		    //4B is a bit of differernt from 2B and 6B
         		    for(i=7; i>=0; i=i-1) begin
         		        alu_in_4B_3[(i+1)*width_4B-1 -: width_4B] <= cont_4B[i];
-        		        casez(sub_action[8+i+1][24:21])
+        		        case(sub_action[8+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
-        		            4'b0001, 4'b0010, 4'b0100, 4'b0101, 4'b0110: begin
+        		            4'b0001, 4'b0010, 4'b0101, 4'b0110: begin
         		                alu_in_4B_1[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][18:16]];
         		                alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][13:11]];
         		            end
@@ -205,10 +205,16 @@ always @(posedge clk or negedge rst_n) begin
         		                //alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= {16'b0,sub_action[8+i+1][15:0]};
         		                alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][13:11]];
         		            end
-				    //store op
+				    //storei op
 				    4'b0011: begin
 					alu_in_4B_1[(i+1)*width_4B-1 -: width_4B] <= sub_action[8+i+1][20:16];
 					alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= sub_action[8+i+1][15:0];
+				    end
+				    //ite op
+				    4'b0100: begin
+					alu_in_4B_1[(i+1)*width_4B-1 -: width_4B] <= cont_4B[sub_action[8+i+1][18:16]];
+					alu_in_4B_2[(i+1)*width_4B-1 -: width_4B] <= sub_action[8+i+1][13:11];
+					alu_in_4B_3[(i+1)*width_4B-1 -: width_4B] <= sub_action[8+i+1][10:0];
 				    end
         		            //if there is no action to take, output the original value
         		            default: begin

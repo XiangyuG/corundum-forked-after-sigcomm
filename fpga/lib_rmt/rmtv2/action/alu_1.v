@@ -59,9 +59,9 @@ always @(*) begin
             	        container_out_r = operand_1_in - operand_2_in;
             	    end
 		    //and op
-                    4'b0100: begin
-                        container_out_r = operand_1_in && operand_2_in;
-                    end
+                    // 4'b0100: begin
+                    //     container_out_r = operand_1_in && operand_2_in;
+                    // end
                     //or op
                     4'b0101: begin
                          container_out_r = operand_1_in || operand_2_in;

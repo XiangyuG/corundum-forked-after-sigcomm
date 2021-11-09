@@ -55,7 +55,8 @@ assign {addr_len, base_addr} = page_tbl_out;
 
 reg                         overflow, overflow_next;
 reg 						ready_out_next;
-
+reg cmp;
+initial cmp = 1'b0;
 
 /********intermediate variables declared here********/
 
@@ -64,10 +65,10 @@ reg 						ready_out_next;
 assign load_addr = operand_2_in[4:0] + base_addr;
 
 assign store_din_w = (action_type==4'b1000 || action_type==4'b0011)?store_din:
-						((action_type==4'b0111)?(load_data+1):0);
+						((action_type==4'b0111 || (action_type==4'b0100 && cmp))?(load_data+1):0);
 
 assign container_out_w = (action_type==4'b1011)?load_data:
-							(action_type==4'b0111)?(load_data+1):
+							(action_type==4'b0111 || (action_type==4'b0100 && cmp))?(load_data+1):
 							container_out;
 
 /*
@@ -135,9 +136,9 @@ always @(*) begin
                         container_out_next = operand_1_in - operand_2_in;
                     end
 		    //and op
-		    4'b0100: begin
-			container_out_next = operand_1_in && operand_2_in;
-		    end
+		    // 4'b0100: begin
+		    //     container_out_next = operand_1_in && operand_2_in;
+		    // end
 		    //or op
 		    4'b0101: begin
                         container_out_next = operand_1_in || operand_2_in;
@@ -157,17 +158,26 @@ always @(*) begin
                     4'b1011: begin
                         container_out_next = operand_3_in;
                     end
-					// loadd op
+		    // loadd op
                     4'b0111: begin
                         // do nothing now
                         //checkme
                         container_out_next = operand_3_in;
                         store_addr_next = operand_2_in[4:0];
                     end
-					// set operation
-					4'b1110: begin
-						container_out_next = operand_2_in;
-					end
+		    // ite op
+		    4'b0100: begin
+			container_out_next = operand_3_in;
+			cmp = !operand_1_in;
+			store_addr_next = operand_2_in[4:0];
+			if (operand_1_in)
+			    store_din_next = operand_3_in;
+
+		    end
+		    // set operation
+		    4'b1110: begin
+			container_out_next = operand_2_in;
+		    end
                     //cannot go back to IDLE since this
                     //might be a legal action.
                     default: begin
@@ -203,7 +213,7 @@ always @(*) begin
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111 || action_type==4'b0100) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
@@ -219,7 +229,7 @@ always @(*) begin
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111 || action_type==4'b0100) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
