@@ -64,11 +64,11 @@ initial cmp = 1'b0;
 // assign load_addr = store_addr[4:0] + base_addr;
 assign load_addr = operand_2_in[4:0] + base_addr;
 
-assign store_din_w = (action_type==4'b1000 || action_type==4'b0011)?store_din:
-						((action_type==4'b0111 || (action_type==4'b0100 && cmp))?(load_data+1):0);
+assign store_din_w = (action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0100)?store_din:
+						((action_type==4'b0111)?(load_data+1):0);
 
-assign container_out_w = (action_type==4'b1011)?load_data:
-							(action_type==4'b0111 || (action_type==4'b0100 && cmp))?(load_data+1):
+assign container_out_w = (action_type==4'b1011 || action_type==4'b0100)?load_data:
+							(action_type==4'b0111)?(load_data+1):
 							container_out;
 
 /*
@@ -98,7 +98,8 @@ localparam  IDLE_S = 3'd0,
             OB_ADDR_S = 3'd2,
             EMPTY2_S = 3'd3,
             OUTPUT_S = 3'd4,
-			HALT_S = 3'd5;
+	    HALT_S = 3'd5,
+	    EMPTY2_S1 = 3'd6;
 
 always @(*) begin
 	alu_state_next = alu_state;
@@ -168,10 +169,10 @@ always @(*) begin
 		    // ite op
 		    4'b0100: begin
 			container_out_next = operand_3_in;
-			cmp = !operand_1_in;
+			//cmp = !operand_1_in;
 			store_addr_next = operand_2_in[4:0];
-			if (operand_1_in)
-			    store_din_next = operand_3_in;
+			//if (operand_1_in)
+			//    store_din_next = operand_3_in;
 
 		    end
 		    // set operation
@@ -207,33 +208,61 @@ always @(*) begin
 		end
         EMPTY2_S: begin
             //wait for the result of RAM
-			if (ready_in) begin
+			if (ready_in && action_type!=4'b0100) begin
 				alu_state_next = IDLE_S;
 				container_out_valid_next = 1;
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111 || action_type==4'b0100) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
+			end
+			else if (ready_in && action_type==4'b0100) begin
+				alu_state_next = EMPTY2_S1;
+				container_out_valid_next = 1;
+                                ready_out_next = 1;
+				if (load_data == 30)
+					store_din_next = 0;
+				else
+					store_din_next = load_data + 1;
+				store_en_next = 1'b1;
 			end
 			else begin
 				alu_state_next = HALT_S;
 			end
         end
+        EMPTY2_S1:begin
+		if (ready_in && action_type==4'b0100) begin
+                        alu_state_next = IDLE_S;
+                end
+		else begin
+			alu_state_next = EMPTY2_S1;
+		end
+	end
 		HALT_S: begin
-			if (ready_in) begin
+			if (ready_in && action_type!=4'b0100) begin
 				alu_state_next = IDLE_S;
 				container_out_valid_next = 1;
 				ready_out_next = 1;
 
 				// action_type
-				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111 || action_type==4'b0100) &&
+				if ((action_type==4'b1000 || action_type==4'b0011 || action_type==4'b0111) &&
 						overflow==0) begin
 					store_en_next = 1'b1;
 				end
 			end
+			else if (ready_in && action_type==4'b0100) begin
+                                alu_state_next = IDLE_S;
+                                container_out_valid_next = 1;
+                                ready_out_next = 1;
+                                if (load_data == 30)
+                                        store_din_next = 0;
+                                else
+                                        store_din_next = load_data + 1;
+                                store_en_next = 1'b1;
+                        end
 		end
 	endcase
 end
