@@ -93,17 +93,49 @@ wire								stg2_phv_out_valid;
 wire [PKT_VEC_WIDTH-1:0]			stg3_phv_out;
 wire								stg3_phv_out_valid;
 
+wire [PKT_VEC_WIDTH-1:0]                        stg4_phv_out;
+wire                                                            stg4_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg5_phv_out;
+wire                                                            stg5_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg6_phv_out;
+wire                                                            stg6_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg7_phv_out;
+wire                                                            stg7_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg8_phv_out;
+wire                                                            stg8_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg9_phv_out;
+wire                                                            stg9_phv_out_valid;
+wire [PKT_VEC_WIDTH-1:0]                        stg10_phv_out;
+wire                                                            stg10_phv_out_valid;
+
 reg [PKT_VEC_WIDTH-1:0]				stg0_phv_in_d1;
 reg [PKT_VEC_WIDTH-1:0]				stg0_phv_out_d1;
 reg [PKT_VEC_WIDTH-1:0]				stg1_phv_out_d1;
 reg [PKT_VEC_WIDTH-1:0]				stg2_phv_out_d1;
 reg [PKT_VEC_WIDTH-1:0]				stg3_phv_out_d1;
 
+reg [PKT_VEC_WIDTH-1:0]                         stg4_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg5_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg6_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg7_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg8_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg9_phv_out_d1;
+reg [PKT_VEC_WIDTH-1:0]                         stg10_phv_out_d1;
+
+
 reg									stg0_phv_in_valid_d1;
 reg									stg0_phv_out_valid_d1;
 reg									stg1_phv_out_valid_d1;
 reg									stg2_phv_out_valid_d1;
 reg									stg3_phv_out_valid_d1;
+
+reg                                                                     stg4_phv_out_valid_d1;
+reg                                                                     stg5_phv_out_valid_d1;
+reg                                                                     stg6_phv_out_valid_d1;
+reg                                                                     stg7_phv_out_valid_d1;
+reg                                                                     stg8_phv_out_valid_d1;
+reg                                                                     stg9_phv_out_valid_d1;
+reg                                                                     stg10_phv_out_valid_d1;
 
 //
 wire [C_VLANID_WIDTH-1:0]			stg0_vlan_in;
@@ -120,6 +152,29 @@ wire								stg2_vlan_valid_out;
 wire								stg3_vlan_ready;
 wire [C_VLANID_WIDTH-1:0]			stg3_vlan_out;
 wire								stg3_vlan_valid_out;
+
+wire                                                            stg4_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg4_vlan_out;
+wire                                                            stg4_vlan_valid_out;
+wire                                                            stg5_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg5_vlan_out;
+wire                                                            stg5_vlan_valid_out;
+wire                                                            stg6_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg6_vlan_out;
+wire                                                            stg6_vlan_valid_out;
+wire                                                            stg7_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg7_vlan_out;
+wire                                                            stg7_vlan_valid_out;
+wire                                                            stg8_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg8_vlan_out;
+wire                                                            stg8_vlan_valid_out;
+wire                                                            stg9_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg9_vlan_out;
+wire                                                            stg9_vlan_valid_out;
+wire                                                            stg10_vlan_ready;
+wire [C_VLANID_WIDTH-1:0]                       stg10_vlan_out;
+wire                                                            stg10_vlan_valid_out;
+
 wire								last_stg_vlan_ready;
 
 reg [C_VLANID_WIDTH-1:0]			stg0_vlan_in_r;
@@ -132,12 +187,35 @@ reg [C_VLANID_WIDTH-1:0]			stg2_vlan_out_r;
 reg									stg2_vlan_valid_out_r;
 reg [C_VLANID_WIDTH-1:0]			stg3_vlan_out_r;
 reg									stg3_vlan_valid_out_r;
+
+reg [C_VLANID_WIDTH-1:0]                        stg4_vlan_out_r;
+reg                                                                     stg4_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg5_vlan_out_r;
+reg                                                                     stg5_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg6_vlan_out_r;
+reg                                                                     stg6_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg7_vlan_out_r;
+reg                                                                     stg7_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg8_vlan_out_r;
+reg                                                                     stg8_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg9_vlan_out_r;
+reg                                                                     stg9_vlan_valid_out_r;
+reg [C_VLANID_WIDTH-1:0]                        stg10_vlan_out_r;
+reg                                                                     stg10_vlan_valid_out_r;
 // back pressure signals
 wire s_axis_tready_p;
 wire stg0_ready;
 wire stg1_ready;
 wire stg2_ready;
 wire stg3_ready;
+
+wire stg4_ready;
+wire stg5_ready;
+wire stg6_ready;
+wire stg7_ready;
+wire stg8_ready;
+wire stg9_ready;
+wire stg10_ready;
 wire last_stg_ready;
 
 //NOTE: to filter out packets other than UDP/IP.
@@ -240,6 +318,91 @@ reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]		ctrl_s_axis_tkeep_7_r;
 reg [C_S_AXIS_TUSER_WIDTH-1:0]				ctrl_s_axis_tuser_7_r;
 reg 										ctrl_s_axis_tvalid_7_r;
 reg 										ctrl_s_axis_tlast_7_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_8;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_8;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_8;
+wire                                                                            ctrl_s_axis_tvalid_8;
+wire                                                                            ctrl_s_axis_tlast_8;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_8_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_8_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_8_r;
+reg                                                                             ctrl_s_axis_tvalid_8_r;
+reg                                                                             ctrl_s_axis_tlast_8_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_9;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_9;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_9;
+wire                                                                            ctrl_s_axis_tvalid_9;
+wire                                                                            ctrl_s_axis_tlast_9;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_9_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_9_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_9_r;
+reg                                                                             ctrl_s_axis_tvalid_9_r;
+reg                                                                             ctrl_s_axis_tlast_9_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_10;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_10;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_10;
+wire                                                                            ctrl_s_axis_tvalid_10;
+wire                                                                            ctrl_s_axis_tlast_10;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_10_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_10_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_10_r;
+reg                                                                             ctrl_s_axis_tvalid_10_r;
+reg                                                                             ctrl_s_axis_tlast_10_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_11;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_11;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_11;
+wire                                                                            ctrl_s_axis_tvalid_11;
+wire                                                                            ctrl_s_axis_tlast_11;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_11_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_11_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_11_r;
+reg                                                                             ctrl_s_axis_tvalid_11_r;
+reg                                                                             ctrl_s_axis_tlast_11_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_12;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_12;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_12;
+wire                                                                            ctrl_s_axis_tvalid_12;
+wire                                                                            ctrl_s_axis_tlast_12;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_12_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_12_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_12_r;
+reg                                                                             ctrl_s_axis_tvalid_12_r;
+reg                                                                             ctrl_s_axis_tlast_12_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_13;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_13;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_13;
+wire                                                                            ctrl_s_axis_tvalid_13;
+wire                                                                            ctrl_s_axis_tlast_13;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_13_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_13_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_13_r;
+reg                                                                             ctrl_s_axis_tvalid_13_r;
+reg                                                                             ctrl_s_axis_tlast_13_r;
+
+wire [C_S_AXIS_DATA_WIDTH-1:0]                          ctrl_s_axis_tdata_14;
+wire [((C_S_AXIS_DATA_WIDTH/8))-1:0]            ctrl_s_axis_tkeep_14;
+wire [C_S_AXIS_TUSER_WIDTH-1:0]                         ctrl_s_axis_tuser_14;
+wire                                                                            ctrl_s_axis_tvalid_14;
+wire                                                                            ctrl_s_axis_tlast_14;
+
+reg [C_S_AXIS_DATA_WIDTH-1:0]                           ctrl_s_axis_tdata_14_r;
+reg [((C_S_AXIS_DATA_WIDTH/8))-1:0]             ctrl_s_axis_tkeep_14_r;
+reg [C_S_AXIS_TUSER_WIDTH-1:0]                          ctrl_s_axis_tuser_14_r;
+reg                                                                             ctrl_s_axis_tvalid_14_r;
+reg                                                                             ctrl_s_axis_tlast_14_r;
+
     // define registers
 	wire [`REG_VLAN_DROP_FLAGS_BITS] vlan_drop_flags_reg;
 	reg [`REG_CTRL_TOKEN_BITS] ctrl_token_reg;
@@ -719,55 +882,662 @@ stage3
 	.c_m_axis_tvalid(ctrl_s_axis_tvalid_6)
 );
 
-// [NOTICE] change to last stage
-last_stage #(
-	.C_S_AXIS_DATA_WIDTH(256),
-	.STAGE_ID(4)
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(4)
 )
 stage4
 (
-	.axis_clk				(clk),
-    .aresetn				(aresetn),
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
 
-	// input
-    .phv_in					(stg3_phv_out_d1),
-    .phv_in_valid			(stg3_phv_out_valid_d1),
-	.vlan_in				(stg3_vlan_out_r),
-	.vlan_valid_in			(stg3_vlan_valid_out_r),
-	.vlan_ready_out			(last_stg_vlan_ready),
-	// back-pressure signals
-	.stage_ready_out		(last_stg_ready),
-	// output
-    .phv_out_0				(last_stg_phv_out[0]),
-    .phv_out_valid_0		(last_stg_phv_out_valid[0]),
-	.phv_fifo_ready_0		(~phv_fifo_nearly_full[0]),
+        // input
+    .phv_in                                     (stg3_phv_out_d1),
+    .phv_in_valid                       (stg3_phv_out_valid_d1),
+        .vlan_in                                (stg3_vlan_out_r),
+        .vlan_valid_in                  (stg3_vlan_valid_out_r),
+        .vlan_ready_out                 (stg4_vlan_ready),
+        // output
+        .vlan_out                               (stg4_vlan_out),
+        .vlan_valid_out                 (stg4_vlan_valid_out),
+        .vlan_out_ready                 (stg5_vlan_ready),
+        // output
+    .phv_out                            (stg4_phv_out),
+    .phv_out_valid                      (stg4_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg4_ready),
+        .stage_ready_in                 (stg5_ready),
 
-    .phv_out_1				(last_stg_phv_out[1]),
-    .phv_out_valid_1		(last_stg_phv_out_valid[1]),
-	.phv_fifo_ready_1		(~phv_fifo_nearly_full[1]),
-
-    .phv_out_2				(last_stg_phv_out[2]),
-    .phv_out_valid_2		(last_stg_phv_out_valid[2]),
-	.phv_fifo_ready_2		(~phv_fifo_nearly_full[2]),
-
-    .phv_out_3				(last_stg_phv_out[3]),
-    .phv_out_valid_3		(last_stg_phv_out_valid[3]),
-	.phv_fifo_ready_3		(~phv_fifo_nearly_full[3]),
-
-	// control path
+        // control path
     .c_s_axis_tdata(ctrl_s_axis_tdata_6_r),
-	.c_s_axis_tuser(ctrl_s_axis_tuser_6_r),
-	.c_s_axis_tkeep(ctrl_s_axis_tkeep_6_r),
-	.c_s_axis_tlast(ctrl_s_axis_tlast_6_r),
-	.c_s_axis_tvalid(ctrl_s_axis_tvalid_6_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_6_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_6_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_6_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_6_r),
 
     .c_m_axis_tdata(ctrl_s_axis_tdata_7),
-	.c_m_axis_tuser(ctrl_s_axis_tuser_7),
-	.c_m_axis_tkeep(ctrl_s_axis_tkeep_7),
-	.c_m_axis_tlast(ctrl_s_axis_tlast_7),
-	.c_m_axis_tvalid(ctrl_s_axis_tvalid_7)
+        .c_m_axis_tuser(ctrl_s_axis_tuser_7),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_7),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_7),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_7)
 );
 
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(5)
+)
+stage5
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg4_phv_out_d1),
+    .phv_in_valid                       (stg4_phv_out_valid_d1),
+        .vlan_in                                (stg4_vlan_out_r),
+        .vlan_valid_in                  (stg4_vlan_valid_out_r),
+        .vlan_ready_out                 (stg5_vlan_ready),
+        // output
+        .vlan_out                               (stg5_vlan_out),
+        .vlan_valid_out                 (stg5_vlan_valid_out),
+        .vlan_out_ready                 (stg6_vlan_ready),
+        // output
+    .phv_out                            (stg5_phv_out),
+    .phv_out_valid                      (stg5_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg5_ready),
+        .stage_ready_in                 (stg6_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_7_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_7_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_7_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_7_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_7_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_8),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_8),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_8),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_8),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_8)
+);
+
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(6)
+)
+stage6
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg5_phv_out_d1),
+    .phv_in_valid                       (stg5_phv_out_valid_d1),
+        .vlan_in                                (stg5_vlan_out_r),
+        .vlan_valid_in                  (stg5_vlan_valid_out_r),
+        .vlan_ready_out                 (stg6_vlan_ready),
+        // output
+        .vlan_out                               (stg6_vlan_out),
+        .vlan_valid_out                 (stg6_vlan_valid_out),
+        .vlan_out_ready                 (stg7_vlan_ready),
+        // output
+    .phv_out                            (stg6_phv_out),
+    .phv_out_valid                      (stg6_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg6_ready),
+        .stage_ready_in                 (stg7_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_8_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_8_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_8_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_8_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_8_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_9),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_9),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_9),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_9),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_9)
+);
+
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(7)
+)
+stage7
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg6_phv_out_d1),
+    .phv_in_valid                       (stg6_phv_out_valid_d1),
+        .vlan_in                                (stg6_vlan_out_r),
+        .vlan_valid_in                  (stg6_vlan_valid_out_r),
+        .vlan_ready_out                 (stg7_vlan_ready),
+        // output
+        .vlan_out                               (stg7_vlan_out),
+        .vlan_valid_out                 (stg7_vlan_valid_out),
+        .vlan_out_ready                 (stg8_vlan_ready),
+        // output
+    .phv_out                            (stg7_phv_out),
+    .phv_out_valid                      (stg7_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg7_ready),
+        .stage_ready_in                 (stg8_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_9_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_9_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_9_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_9_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_9_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_10),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_10),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_10),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_10),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_10)
+);
+
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(8)
+)
+stage8
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg7_phv_out_d1),
+    .phv_in_valid                       (stg7_phv_out_valid_d1),
+        .vlan_in                                (stg7_vlan_out_r),
+        .vlan_valid_in                  (stg7_vlan_valid_out_r),
+        .vlan_ready_out                 (stg8_vlan_ready),
+        // output
+        .vlan_out                               (stg8_vlan_out),
+        .vlan_valid_out                 (stg8_vlan_valid_out),
+        .vlan_out_ready                 (stg9_vlan_ready),
+        // output
+    .phv_out                            (stg8_phv_out),
+    .phv_out_valid                      (stg8_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg8_ready),
+        .stage_ready_in                 (stg9_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_10_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_10_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_10_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_10_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_10_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_11),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_11),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_11),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_11),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_11)
+);
+
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(9)
+)
+stage9
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg8_phv_out_d1),
+    .phv_in_valid                       (stg8_phv_out_valid_d1),
+        .vlan_in                                (stg8_vlan_out_r),
+        .vlan_valid_in                  (stg8_vlan_valid_out_r),
+        .vlan_ready_out                 (stg9_vlan_ready),
+        // output
+        .vlan_out                               (stg9_vlan_out),
+        .vlan_valid_out                 (stg9_vlan_valid_out),
+        .vlan_out_ready                 (last_stg_vlan_ready),
+        // output
+    .phv_out                            (stg9_phv_out),
+    .phv_out_valid                      (stg9_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg9_ready),
+        .stage_ready_in                 (last_stg_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_11_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_11_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_11_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_11_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_11_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_12),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_12),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_12),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_12),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_12)
+);
+/*
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(10)
+)
+stage10
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg9_phv_out_d1),
+    .phv_in_valid                       (stg9_phv_out_valid_d1),
+        .vlan_in                                (stg9_vlan_out_r),
+        .vlan_valid_in                  (stg9_vlan_valid_out_r),
+        .vlan_ready_out                 (stg10_vlan_ready),
+        // output
+        .vlan_out                               (stg10_vlan_out),
+        .vlan_valid_out                 (stg10_vlan_valid_out),
+        .vlan_out_ready                 (last_vlan_ready),
+        // output
+    .phv_out                            (stg10_phv_out),
+    .phv_out_valid                      (stg10_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg10_ready),
+        .stage_ready_in                 (last_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_12_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_12_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_12_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_12_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_12_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_13),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_13),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_13),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_13),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_13)
+);
+*/
+last_stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(10)
+)
+stage10
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg9_phv_out_d1),
+    .phv_in_valid                       (stg9_phv_out_valid_d1),
+        .vlan_in                                (stg9_vlan_out_r),
+        .vlan_valid_in                  (stg9_vlan_valid_out_r),
+        .vlan_ready_out                 (last_stg_vlan_ready),
+        // back-pressure signals
+        .stage_ready_out                (last_stg_ready),
+        // output
+    .phv_out_0                          (last_stg_phv_out[0]),
+    .phv_out_valid_0            (last_stg_phv_out_valid[0]),
+        .phv_fifo_ready_0               (~phv_fifo_nearly_full[0]),
+
+    .phv_out_1                          (last_stg_phv_out[1]),
+    .phv_out_valid_1            (last_stg_phv_out_valid[1]),
+        .phv_fifo_ready_1               (~phv_fifo_nearly_full[1]),
+
+    .phv_out_2                          (last_stg_phv_out[2]),
+    .phv_out_valid_2            (last_stg_phv_out_valid[2]),
+        .phv_fifo_ready_2               (~phv_fifo_nearly_full[2]),
+
+    .phv_out_3                          (last_stg_phv_out[3]),
+    .phv_out_valid_3            (last_stg_phv_out_valid[3]),
+        .phv_fifo_ready_3               (~phv_fifo_nearly_full[3]),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_12_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_12_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_12_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_12_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_12_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_13),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_13),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_13),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_13),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_13)
+);
+
+
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(4)
+//)
+//stage4
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg3_phv_out_d1),
+//    .phv_in_valid                       (stg3_phv_out_valid_d1),
+//        .vlan_in                                (stg3_vlan_out_r),
+//        .vlan_valid_in                  (stg3_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg4_vlan_ready),
+//        // output
+//        .vlan_out                               (stg4_vlan_out),
+//        .vlan_valid_out                 (stg4_vlan_valid_out),
+//        .vlan_out_ready                 (stg5_vlan_ready),
+//        // output
+//    .phv_out                            (stg4_phv_out),
+//    .phv_out_valid                      (stg4_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg4_ready),
+//        .stage_ready_in                 (stg5_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_6_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_6_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_6_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_6_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_6_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_7),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_7),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_7),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_7),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_7)
+//);
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(5)
+//)
+//stage5
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg4_phv_out_d1),
+//    .phv_in_valid                       (stg4_phv_out_valid_d1),
+//        .vlan_in                                (stg4_vlan_out_r),
+//        .vlan_valid_in                  (stg4_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg5_vlan_ready),
+//        // output
+//        .vlan_out                               (stg5_vlan_out),
+//        .vlan_valid_out                 (stg5_vlan_valid_out),
+//        .vlan_out_ready                 (stg6_vlan_ready),
+//        // output
+//    .phv_out                            (stg5_phv_out),
+//    .phv_out_valid                      (stg5_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg5_ready),
+//        .stage_ready_in                 (stg6_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_7_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_7_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_7_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_7_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_7_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_8),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_8),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_8),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_8),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_8)
+//);
+//
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(6)
+//)
+//stage6
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg5_phv_out_d1),
+//    .phv_in_valid                       (stg5_phv_out_valid_d1),
+//        .vlan_in                                (stg5_vlan_out_r),
+//        .vlan_valid_in                  (stg5_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg6_vlan_ready),
+//        // output
+//        .vlan_out                               (stg6_vlan_out),
+//        .vlan_valid_out                 (stg6_vlan_valid_out),
+//        .vlan_out_ready                 (stg7_vlan_ready),
+//        // output
+//    .phv_out                            (stg6_phv_out),
+//    .phv_out_valid                      (stg6_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg6_ready),
+//        .stage_ready_in                 (stg7_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_8_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_8_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_8_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_8_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_8_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_9),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_9),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_9),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_9),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_9)
+//);
+//
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(7)
+//)
+//stage7
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg6_phv_out_d1),
+//    .phv_in_valid                       (stg6_phv_out_valid_d1),
+//        .vlan_in                                (stg6_vlan_out_r),
+//        .vlan_valid_in                  (stg6_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg7_vlan_ready),
+//        // output
+//        .vlan_out                               (stg7_vlan_out),
+//        .vlan_valid_out                 (stg7_vlan_valid_out),
+//        .vlan_out_ready                 (stg8_vlan_ready),
+//        // output
+//    .phv_out                            (stg7_phv_out),
+//    .phv_out_valid                      (stg7_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg7_ready),
+//        .stage_ready_in                 (stg8_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_9_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_9_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_9_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_9_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_9_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_10),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_10),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_10),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_10),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_10)
+//);
+//
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(8)
+//)
+//stage8
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg7_phv_out_d1),
+//    .phv_in_valid                       (stg7_phv_out_valid_d1),
+//        .vlan_in                                (stg7_vlan_out_r),
+//        .vlan_valid_in                  (stg7_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg8_vlan_ready),
+//        // output
+//        .vlan_out                               (stg8_vlan_out),
+//        .vlan_valid_out                 (stg8_vlan_valid_out),
+//        .vlan_out_ready                 (stg9_vlan_ready),
+//        // output
+//    .phv_out                            (stg8_phv_out),
+//    .phv_out_valid                      (stg8_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg8_ready),
+//        .stage_ready_in                 (stg9_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_10_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_10_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_10_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_10_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_10_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_11),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_11),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_11),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_11),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_11)
+//);
+//
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(9)
+//)
+//stage9
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg8_phv_out_d1),
+//    .phv_in_valid                       (stg8_phv_out_valid_d1),
+//        .vlan_in                                (stg8_vlan_out_r),
+//        .vlan_valid_in                  (stg8_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg9_vlan_ready),
+//        // output
+//        .vlan_out                               (stg9_vlan_out),
+//        .vlan_valid_out                 (stg9_vlan_valid_out),
+//        .vlan_out_ready                 (stg10_vlan_ready),
+//        // output
+//    .phv_out                            (stg9_phv_out),
+//    .phv_out_valid                      (stg9_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg9_ready),
+//        .stage_ready_in                 (stg10_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_11_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_11_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_11_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_11_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_11_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_12),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_12),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_12),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_12),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_12)
+//);
+//
+//stage #(
+//        .C_S_AXIS_DATA_WIDTH(256),
+//        .STAGE_ID(10)
+//)
+//stage10
+//(
+//        .axis_clk                               (clk),
+//    .aresetn                            (aresetn),
+//
+//        // input
+//    .phv_in                                     (stg9_phv_out_d1),
+//    .phv_in_valid                       (stg9_phv_out_valid_d1),
+//        .vlan_in                                (stg9_vlan_out_r),
+//        .vlan_valid_in                  (stg9_vlan_valid_out_r),
+//        .vlan_ready_out                 (stg10_vlan_ready),
+//        // output
+//        .vlan_out                               (stg10_vlan_out),
+//        .vlan_valid_out                 (stg10_vlan_valid_out),
+//        .vlan_out_ready                 (last_vlan_ready),
+//        // output
+//    .phv_out                            (stg10_phv_out),
+//    .phv_out_valid                      (stg10_phv_out_valid),
+//        // back-pressure signals
+//        .stage_ready_out                (stg10_ready),
+//        .stage_ready_in                 (last_ready),
+//
+//        // control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_12_r),
+//        .c_s_axis_tuser(ctrl_s_axis_tuser_12_r),
+//        .c_s_axis_tkeep(ctrl_s_axis_tkeep_12_r),
+//        .c_s_axis_tlast(ctrl_s_axis_tlast_12_r),
+//        .c_s_axis_tvalid(ctrl_s_axis_tvalid_12_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_13),
+//        .c_m_axis_tuser(ctrl_s_axis_tuser_13),
+//        .c_m_axis_tkeep(ctrl_s_axis_tkeep_13),
+//        .c_m_axis_tlast(ctrl_s_axis_tlast_13),
+//        .c_m_axis_tvalid(ctrl_s_axis_tvalid_13)
+//);
+//
+//// [NOTICE] change to last stage
+//last_stage #(
+//	.C_S_AXIS_DATA_WIDTH(256),
+//	.STAGE_ID(11)
+//)
+//stage11
+//(
+//	.axis_clk				(clk),
+//    .aresetn				(aresetn),
+//
+//	// input
+//    .phv_in					(stg10_phv_out_d1),
+//    .phv_in_valid			(stg10_phv_out_valid_d1),
+//	.vlan_in				(stg10_vlan_out_r),
+//	.vlan_valid_in			(stg10_vlan_valid_out_r),
+//	.vlan_ready_out			(last_stg_vlan_ready),
+//	// back-pressure signals
+//	.stage_ready_out		(last_stg_ready),
+//	// output
+//    .phv_out_0				(last_stg_phv_out[0]),
+//    .phv_out_valid_0		(last_stg_phv_out_valid[0]),
+//	.phv_fifo_ready_0		(~phv_fifo_nearly_full[0]),
+//
+//    .phv_out_1				(last_stg_phv_out[1]),
+//    .phv_out_valid_1		(last_stg_phv_out_valid[1]),
+//	.phv_fifo_ready_1		(~phv_fifo_nearly_full[1]),
+//
+//    .phv_out_2				(last_stg_phv_out[2]),
+//    .phv_out_valid_2		(last_stg_phv_out_valid[2]),
+//	.phv_fifo_ready_2		(~phv_fifo_nearly_full[2]),
+//
+//    .phv_out_3				(last_stg_phv_out[3]),
+//    .phv_out_valid_3		(last_stg_phv_out_valid[3]),
+//	.phv_fifo_ready_3		(~phv_fifo_nearly_full[3]),
+//
+//	// control path
+//    .c_s_axis_tdata(ctrl_s_axis_tdata_13_r),
+//	.c_s_axis_tuser(ctrl_s_axis_tuser_13_r),
+//	.c_s_axis_tkeep(ctrl_s_axis_tkeep_13_r),
+//	.c_s_axis_tlast(ctrl_s_axis_tlast_13_r),
+//	.c_s_axis_tvalid(ctrl_s_axis_tvalid_13_r),
+//
+//    .c_m_axis_tdata(ctrl_s_axis_tdata_14),
+//	.c_m_axis_tuser(ctrl_s_axis_tuser_14),
+//	.c_m_axis_tkeep(ctrl_s_axis_tkeep_14),
+//	.c_m_axis_tlast(ctrl_s_axis_tlast_14),
+//	.c_m_axis_tvalid(ctrl_s_axis_tvalid_14)
+//);
 //
 
 wire [C_S_AXIS_DATA_WIDTH-1:0]			depar_out_tdata [C_NUM_QUEUES-1:0];
@@ -809,11 +1579,11 @@ generate
 			.depar_out_tready		(depar_out_tready[i]), // input
 		
 			// control path
-			.ctrl_s_axis_tdata(ctrl_s_axis_tdata_7_r),
-			.ctrl_s_axis_tuser(ctrl_s_axis_tuser_7_r),
-			.ctrl_s_axis_tkeep(ctrl_s_axis_tkeep_7_r),
-			.ctrl_s_axis_tlast(ctrl_s_axis_tlast_7_r),
-			.ctrl_s_axis_tvalid(ctrl_s_axis_tvalid_7_r)
+			.ctrl_s_axis_tdata(ctrl_s_axis_tdata_13_r),
+			.ctrl_s_axis_tuser(ctrl_s_axis_tuser_13_r),
+			.ctrl_s_axis_tkeep(ctrl_s_axis_tkeep_13_r),
+			.ctrl_s_axis_tlast(ctrl_s_axis_tlast_13_r),
+			.ctrl_s_axis_tvalid(ctrl_s_axis_tvalid_13_r)
 		);
 	end
 endgenerate
@@ -889,11 +1659,27 @@ always @(posedge clk) begin
 		stg2_phv_out_valid_d1 <= 0;
 		stg3_phv_out_valid_d1 <= 0;
 
+		stg4_phv_out_valid_d1 <= 0;
+		stg5_phv_out_valid_d1 <= 0;
+                stg6_phv_out_valid_d1 <= 0;
+                stg7_phv_out_valid_d1 <= 0;
+                stg8_phv_out_valid_d1 <= 0;
+		stg9_phv_out_valid_d1 <= 0;
+                stg10_phv_out_valid_d1 <= 0;
+
 		stg0_phv_in_d1 <= 0;
 		stg0_phv_out_d1 <= 0;
 		stg1_phv_out_d1 <= 0;
 		stg2_phv_out_d1 <= 0;
 		stg3_phv_out_d1 <= 0;
+
+		stg4_phv_out_d1 <= 0;
+		stg5_phv_out_d1 <= 0;
+                stg6_phv_out_d1 <= 0;
+                stg7_phv_out_d1 <= 0;
+                stg8_phv_out_d1 <= 0;
+		stg9_phv_out_d1 <= 0;
+                stg10_phv_out_d1 <= 0;
 		//
 		stg0_vlan_in_r <= 0;
 		stg0_vlan_valid_in_r <= 0;
@@ -905,6 +1691,21 @@ always @(posedge clk) begin
 		stg2_vlan_valid_out_r <= 0;
 		stg3_vlan_out_r <= 0;
 		stg3_vlan_valid_out_r <= 0;
+
+		stg4_vlan_out_r <= 0;
+                stg4_vlan_valid_out_r <= 0;
+		stg5_vlan_out_r <= 0;
+                stg5_vlan_valid_out_r <= 0;
+		stg6_vlan_out_r <= 0;
+                stg6_vlan_valid_out_r <= 0;
+		stg7_vlan_out_r <= 0;
+                stg7_vlan_valid_out_r <= 0;
+		stg8_vlan_out_r <= 0;
+                stg8_vlan_valid_out_r <= 0;
+		stg9_vlan_out_r <= 0;
+                stg9_vlan_valid_out_r <= 0;
+		stg10_vlan_out_r <= 0;
+                stg10_vlan_valid_out_r <= 0;
 	end
 	else begin
 		stg0_phv_in_valid_d1 <= stg0_phv_in_valid;
@@ -913,11 +1714,27 @@ always @(posedge clk) begin
 		stg2_phv_out_valid_d1 <= stg2_phv_out_valid;
 		stg3_phv_out_valid_d1 <= stg3_phv_out_valid;
 
+		stg4_phv_out_valid_d1 <= stg4_phv_out_valid;
+		stg5_phv_out_valid_d1 <= stg5_phv_out_valid;
+                stg6_phv_out_valid_d1 <= stg6_phv_out_valid;
+                stg7_phv_out_valid_d1 <= stg7_phv_out_valid;
+                stg8_phv_out_valid_d1 <= stg8_phv_out_valid;
+		stg9_phv_out_valid_d1 <= stg9_phv_out_valid;
+                stg10_phv_out_valid_d1 <= stg10_phv_out_valid;
+
 		stg0_phv_in_d1 <= stg0_phv_in;
 		stg0_phv_out_d1 <= stg0_phv_out;
 		stg1_phv_out_d1 <= stg1_phv_out;
 		stg2_phv_out_d1 <= stg2_phv_out;
 		stg3_phv_out_d1 <= stg3_phv_out;
+
+		stg4_phv_out_d1 <= stg4_phv_out;
+		stg5_phv_out_d1 <= stg5_phv_out;
+                stg6_phv_out_d1 <= stg6_phv_out;
+                stg7_phv_out_d1 <= stg7_phv_out;
+                stg8_phv_out_d1 <= stg8_phv_out;
+		stg9_phv_out_d1 <= stg9_phv_out;
+                stg10_phv_out_d1 <= stg10_phv_out;
 		//
 		stg0_vlan_in_r <= stg0_vlan_in;
 		stg0_vlan_valid_in_r <= stg0_vlan_valid_in;
@@ -929,6 +1746,21 @@ always @(posedge clk) begin
 		stg2_vlan_valid_out_r <= stg2_vlan_valid_out;
 		stg3_vlan_out_r <= stg3_vlan_out;
 		stg3_vlan_valid_out_r <= stg3_vlan_valid_out;
+
+		stg4_vlan_out_r <= stg4_vlan_out;
+                stg4_vlan_valid_out_r <= stg4_vlan_valid_out;
+		stg5_vlan_out_r <= stg5_vlan_out;
+                stg5_vlan_valid_out_r <= stg5_vlan_valid_out;
+                stg6_vlan_out_r <= stg6_vlan_out;
+                stg6_vlan_valid_out_r <= stg6_vlan_valid_out;
+                stg7_vlan_out_r <= stg7_vlan_out;
+                stg7_vlan_valid_out_r <= stg7_vlan_valid_out;
+                stg8_vlan_out_r <= stg8_vlan_out;
+                stg8_vlan_valid_out_r <= stg8_vlan_valid_out;
+		stg9_vlan_out_r <= stg9_vlan_out;
+                stg9_vlan_valid_out_r <= stg9_vlan_valid_out;
+                stg10_vlan_out_r <= stg10_vlan_out;
+                stg10_vlan_valid_out_r <= stg10_vlan_valid_out;
 	end
 end
 
@@ -975,6 +1807,49 @@ always @(posedge clk) begin
 		ctrl_s_axis_tkeep_7_r <= 0;
 		ctrl_s_axis_tlast_7_r <= 0;
 		ctrl_s_axis_tvalid_7_r <= 0;
+
+		ctrl_s_axis_tdata_8_r <= 0;
+                ctrl_s_axis_tuser_8_r <= 0;
+                ctrl_s_axis_tkeep_8_r <= 0;
+                ctrl_s_axis_tlast_8_r <= 0;
+                ctrl_s_axis_tvalid_8_r <= 0;
+
+		ctrl_s_axis_tdata_9_r <= 0;
+                ctrl_s_axis_tuser_9_r <= 0;
+                ctrl_s_axis_tkeep_9_r <= 0;
+                ctrl_s_axis_tlast_9_r <= 0;
+                ctrl_s_axis_tvalid_9_r <= 0;
+
+		ctrl_s_axis_tdata_10_r <= 0;
+                ctrl_s_axis_tuser_10_r <= 0;
+                ctrl_s_axis_tkeep_10_r <= 0;
+                ctrl_s_axis_tlast_10_r <= 0;
+                ctrl_s_axis_tvalid_10_r <= 0;
+
+		ctrl_s_axis_tdata_11_r <= 0;
+                ctrl_s_axis_tuser_11_r <= 0;
+                ctrl_s_axis_tkeep_11_r <= 0;
+                ctrl_s_axis_tlast_11_r <= 0;
+                ctrl_s_axis_tvalid_11_r <= 0;
+
+		ctrl_s_axis_tdata_12_r <= 0;
+                ctrl_s_axis_tuser_12_r <= 0;
+                ctrl_s_axis_tkeep_12_r <= 0;
+                ctrl_s_axis_tlast_12_r <= 0;
+                ctrl_s_axis_tvalid_12_r <= 0;
+
+		ctrl_s_axis_tdata_13_r <= 0;
+                ctrl_s_axis_tuser_13_r <= 0;
+                ctrl_s_axis_tkeep_13_r <= 0;
+                ctrl_s_axis_tlast_13_r <= 0;
+                ctrl_s_axis_tvalid_13_r <= 0;
+
+		ctrl_s_axis_tdata_14_r <= 0;
+                ctrl_s_axis_tuser_14_r <= 0;
+                ctrl_s_axis_tkeep_14_r <= 0;
+                ctrl_s_axis_tlast_14_r <= 0;
+                ctrl_s_axis_tvalid_14_r <= 0;
+
 	end
 	else begin
 		ctrl_s_axis_tdata_1_r <= ctrl_s_axis_tdata_1;
@@ -1018,6 +1893,48 @@ always @(posedge clk) begin
 		ctrl_s_axis_tkeep_7_r <= ctrl_s_axis_tkeep_7;
 		ctrl_s_axis_tlast_7_r <= ctrl_s_axis_tlast_7;
 		ctrl_s_axis_tvalid_7_r <= ctrl_s_axis_tvalid_7;
+
+		ctrl_s_axis_tdata_8_r <= ctrl_s_axis_tdata_8;
+                ctrl_s_axis_tuser_8_r <= ctrl_s_axis_tuser_8;
+                ctrl_s_axis_tkeep_8_r <= ctrl_s_axis_tkeep_8;
+                ctrl_s_axis_tlast_8_r <= ctrl_s_axis_tlast_8;
+                ctrl_s_axis_tvalid_8_r <= ctrl_s_axis_tvalid_8;
+
+		ctrl_s_axis_tdata_9_r <= ctrl_s_axis_tdata_9;
+                ctrl_s_axis_tuser_9_r <= ctrl_s_axis_tuser_9;
+                ctrl_s_axis_tkeep_9_r <= ctrl_s_axis_tkeep_9;
+                ctrl_s_axis_tlast_9_r <= ctrl_s_axis_tlast_9;
+                ctrl_s_axis_tvalid_9_r <= ctrl_s_axis_tvalid_9;
+
+		ctrl_s_axis_tdata_10_r <= ctrl_s_axis_tdata_10;
+                ctrl_s_axis_tuser_10_r <= ctrl_s_axis_tuser_10;
+                ctrl_s_axis_tkeep_10_r <= ctrl_s_axis_tkeep_10;
+                ctrl_s_axis_tlast_10_r <= ctrl_s_axis_tlast_10;
+                ctrl_s_axis_tvalid_10_r <= ctrl_s_axis_tvalid_10;
+
+		ctrl_s_axis_tdata_11_r <= ctrl_s_axis_tdata_11;
+                ctrl_s_axis_tuser_11_r <= ctrl_s_axis_tuser_11;
+                ctrl_s_axis_tkeep_11_r <= ctrl_s_axis_tkeep_11;
+                ctrl_s_axis_tlast_11_r <= ctrl_s_axis_tlast_11;
+                ctrl_s_axis_tvalid_11_r <= ctrl_s_axis_tvalid_11;
+
+		ctrl_s_axis_tdata_12_r <= ctrl_s_axis_tdata_12;
+                ctrl_s_axis_tuser_12_r <= ctrl_s_axis_tuser_12;
+                ctrl_s_axis_tkeep_12_r <= ctrl_s_axis_tkeep_12;
+                ctrl_s_axis_tlast_12_r <= ctrl_s_axis_tlast_12;
+                ctrl_s_axis_tvalid_12_r <= ctrl_s_axis_tvalid_12;
+
+		ctrl_s_axis_tdata_13_r <= ctrl_s_axis_tdata_13;
+                ctrl_s_axis_tuser_13_r <= ctrl_s_axis_tuser_13;
+                ctrl_s_axis_tkeep_13_r <= ctrl_s_axis_tkeep_13;
+                ctrl_s_axis_tlast_13_r <= ctrl_s_axis_tlast_13;
+                ctrl_s_axis_tvalid_13_r <= ctrl_s_axis_tvalid_13;
+
+		ctrl_s_axis_tdata_14_r <= ctrl_s_axis_tdata_14;
+                ctrl_s_axis_tuser_14_r <= ctrl_s_axis_tuser_14;
+                ctrl_s_axis_tkeep_14_r <= ctrl_s_axis_tkeep_14;
+                ctrl_s_axis_tlast_14_r <= ctrl_s_axis_tlast_14;
+                ctrl_s_axis_tvalid_14_r <= ctrl_s_axis_tvalid_14;
 
 	end
 end
