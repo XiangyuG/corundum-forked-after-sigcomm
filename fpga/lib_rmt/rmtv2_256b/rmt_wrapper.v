@@ -1100,13 +1100,13 @@ stage9
         // output
         .vlan_out                               (stg9_vlan_out),
         .vlan_valid_out                 (stg9_vlan_valid_out),
-        .vlan_out_ready                 (last_stg_vlan_ready),
+        .vlan_out_ready                 (stg10_vlan_ready),
         // output
     .phv_out                            (stg9_phv_out),
     .phv_out_valid                      (stg9_phv_out_valid),
         // back-pressure signals
         .stage_ready_out                (stg9_ready),
-        .stage_ready_in                 (last_stg_ready),
+        .stage_ready_in                 (stg10_ready),
 
         // control path
     .c_s_axis_tdata(ctrl_s_axis_tdata_11_r),
@@ -1120,6 +1120,46 @@ stage9
         .c_m_axis_tkeep(ctrl_s_axis_tkeep_12),
         .c_m_axis_tlast(ctrl_s_axis_tlast_12),
         .c_m_axis_tvalid(ctrl_s_axis_tvalid_12)
+);
+
+stage #(
+        .C_S_AXIS_DATA_WIDTH(256),
+        .STAGE_ID(10)
+)
+stage10
+(
+        .axis_clk                               (clk),
+    .aresetn                            (aresetn),
+
+        // input
+    .phv_in                                     (stg9_phv_out_d1),
+    .phv_in_valid                       (stg9_phv_out_valid_d1),
+        .vlan_in                                (stg9_vlan_out_r),
+        .vlan_valid_in                  (stg9_vlan_valid_out_r),
+        .vlan_ready_out                 (stg10_vlan_ready),
+        // output
+        .vlan_out                               (stg10_vlan_out),
+        .vlan_valid_out                 (stg10_vlan_valid_out),
+        .vlan_out_ready                 (last_stg_vlan_ready),
+        // output
+    .phv_out                            (stg10_phv_out),
+    .phv_out_valid                      (stg10_phv_out_valid),
+        // back-pressure signals
+        .stage_ready_out                (stg10_ready),
+        .stage_ready_in                 (last_stg_ready),
+
+        // control path
+    .c_s_axis_tdata(ctrl_s_axis_tdata_12_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_12_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_12_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_12_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_12_r),
+
+    .c_m_axis_tdata(ctrl_s_axis_tdata_13),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_13),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_13),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_13),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_13)
 );
 /*
 stage #(
@@ -1164,18 +1204,18 @@ stage10
 */
 last_stage #(
         .C_S_AXIS_DATA_WIDTH(256),
-        .STAGE_ID(10)
+        .STAGE_ID(11)
 )
-stage10
+stage11
 (
         .axis_clk                               (clk),
     .aresetn                            (aresetn),
 
         // input
-    .phv_in                                     (stg9_phv_out_d1),
-    .phv_in_valid                       (stg9_phv_out_valid_d1),
-        .vlan_in                                (stg9_vlan_out_r),
-        .vlan_valid_in                  (stg9_vlan_valid_out_r),
+    .phv_in                                     (stg10_phv_out_d1),
+    .phv_in_valid                       (stg10_phv_out_valid_d1),
+        .vlan_in                                (stg10_vlan_out_r),
+        .vlan_valid_in                  (stg10_vlan_valid_out_r),
         .vlan_ready_out                 (last_stg_vlan_ready),
         // back-pressure signals
         .stage_ready_out                (last_stg_ready),
@@ -1197,17 +1237,17 @@ stage10
         .phv_fifo_ready_3               (~phv_fifo_nearly_full[3]),
 
         // control path
-    .c_s_axis_tdata(ctrl_s_axis_tdata_12_r),
-        .c_s_axis_tuser(ctrl_s_axis_tuser_12_r),
-        .c_s_axis_tkeep(ctrl_s_axis_tkeep_12_r),
-        .c_s_axis_tlast(ctrl_s_axis_tlast_12_r),
-        .c_s_axis_tvalid(ctrl_s_axis_tvalid_12_r),
+    .c_s_axis_tdata(ctrl_s_axis_tdata_13_r),
+        .c_s_axis_tuser(ctrl_s_axis_tuser_13_r),
+        .c_s_axis_tkeep(ctrl_s_axis_tkeep_13_r),
+        .c_s_axis_tlast(ctrl_s_axis_tlast_13_r),
+        .c_s_axis_tvalid(ctrl_s_axis_tvalid_13_r),
 
-    .c_m_axis_tdata(ctrl_s_axis_tdata_13),
-        .c_m_axis_tuser(ctrl_s_axis_tuser_13),
-        .c_m_axis_tkeep(ctrl_s_axis_tkeep_13),
-        .c_m_axis_tlast(ctrl_s_axis_tlast_13),
-        .c_m_axis_tvalid(ctrl_s_axis_tvalid_13)
+    .c_m_axis_tdata(ctrl_s_axis_tdata_14),
+        .c_m_axis_tuser(ctrl_s_axis_tuser_14),
+        .c_m_axis_tkeep(ctrl_s_axis_tkeep_14),
+        .c_m_axis_tlast(ctrl_s_axis_tlast_14),
+        .c_m_axis_tvalid(ctrl_s_axis_tvalid_14)
 );
 
 
@@ -1579,11 +1619,11 @@ generate
 			.depar_out_tready		(depar_out_tready[i]), // input
 		
 			// control path
-			.ctrl_s_axis_tdata(ctrl_s_axis_tdata_13_r),
-			.ctrl_s_axis_tuser(ctrl_s_axis_tuser_13_r),
-			.ctrl_s_axis_tkeep(ctrl_s_axis_tkeep_13_r),
-			.ctrl_s_axis_tlast(ctrl_s_axis_tlast_13_r),
-			.ctrl_s_axis_tvalid(ctrl_s_axis_tvalid_13_r)
+			.ctrl_s_axis_tdata(ctrl_s_axis_tdata_14_r),
+			.ctrl_s_axis_tuser(ctrl_s_axis_tuser_14_r),
+			.ctrl_s_axis_tkeep(ctrl_s_axis_tkeep_14_r),
+			.ctrl_s_axis_tlast(ctrl_s_axis_tlast_14_r),
+			.ctrl_s_axis_tvalid(ctrl_s_axis_tvalid_14_r)
 		);
 	end
 endgenerate
