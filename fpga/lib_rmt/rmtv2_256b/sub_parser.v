@@ -3,7 +3,8 @@
 
 
 module sub_parser #(
-	parameter PKTS_HDR_LEN = 1024,
+	parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+	parameter PKTS_HDR_LEN = (2+4+6)*8*NUM_PER_TYPE + 256,
 	parameter PARSE_ACT_LEN = 16,
 	parameter VAL_OUT_LEN = 48
 )

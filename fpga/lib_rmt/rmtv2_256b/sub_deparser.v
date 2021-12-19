@@ -2,7 +2,8 @@
 
 
 module sub_deparser #(
-	parameter C_PKT_VEC_WIDTH = (6+4+2)*8*8+256,
+	parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+	parameter C_PKT_VEC_WIDTH = (6+4+2)*8*NUM_PER_TYPE+256,
 	parameter C_PARSE_ACT_LEN = 6						// only 6 bits are used here
 )
 (
@@ -19,8 +20,8 @@ module sub_deparser #(
 );
 
 localparam PHV_2B_START_POS = 0+256;
-localparam PHV_4B_START_POS = 16*8+256;
-localparam PHV_6B_START_POS = 16*8+32*8+256;
+localparam PHV_4B_START_POS = 16*NUM_PER_TYPE+256;
+localparam PHV_6B_START_POS = 16*NUM_PER_TYPE+32*NUM_PER_TYPE+256;
 
 
 reg			val_out_valid_nxt;

@@ -35,7 +35,8 @@
 module parser_do_parsing #(
 	parameter C_AXIS_DATA_WIDTH = 256,
 	parameter C_AXIS_TUSER_WIDTH = 128,
-	parameter PKT_HDR_LEN = (6+4+2)*8*8+256, // check with the doc
+	parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+        parameter PKT_HDR_LEN = (2+4+6)*8*NUM_PER_TYPE + 256, // check with the doc
 	parameter PARSER_MOD_ID = 3'b0,
 	parameter C_NUM_SEGS = 4,
 	parameter C_VLANID_WIDTH = 12

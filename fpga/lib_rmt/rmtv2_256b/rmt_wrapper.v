@@ -79,7 +79,8 @@ module rmt_wrapper #(
 );
 
 /*=================================================*/
-localparam PKT_VEC_WIDTH = (6+4+2)*8*8+256;
+localparam NUM_PER_TYPE = 8;  // this represents how many containers per type
+localparam PKT_VEC_WIDTH = (6+4+2)*8*NUM_PER_TYPE+256;
 // 
 wire [PKT_VEC_WIDTH-1:0]			stg0_phv_in;
 wire								stg0_phv_in_valid;
