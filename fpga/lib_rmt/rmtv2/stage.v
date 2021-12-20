@@ -4,7 +4,8 @@ module stage #(
     parameter C_S_AXIS_DATA_WIDTH = 512,
     parameter C_S_AXIS_TUSER_WIDTH = 128,
     parameter STAGE_ID = 0,  // valid: 0-4
-    parameter PHV_LEN = 48*8+32*8+16*8+256,
+    parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+    parameter PHV_LEN = 48*NUM_PER_TYPE+32*NUM_PER_TYPE+16*NUM_PER_TYPE+256,
     parameter KEY_LEN = 48*2+32*2+16*2+1,
     parameter ACT_LEN = 25,
     parameter KEY_OFF = 6*3+20,

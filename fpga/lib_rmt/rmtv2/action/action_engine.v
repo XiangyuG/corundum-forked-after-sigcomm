@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
 module action_engine #(
     parameter STAGE_ID = 0,
-    parameter PHV_LEN = 48*8+32*8+16*8+256,
+    parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+    parameter PHV_LEN = 48*NUM_PER_TYPE+32*NUM_PER_TYPE+16*NUM_PER_TYPE+256,
     parameter ACT_LEN = 25,
     parameter ACTION_ID = 3,
     parameter C_S_AXIS_DATA_WIDTH = 512,
@@ -94,9 +95,9 @@ wire [15:0]					page_tbl_out;
 /********intermediate variables declared here********/
 /********IPs instancilized here*********/
 
-wire [width_6B-1:0]			output_6B[0:7];
-wire [width_4B-1:0]			output_4B[0:7];
-wire [width_2B-1:0]			output_2B[0:7];
+wire [width_6B-1:0]			output_6B[0:NUM_PER_TYPE - 1];
+wire [width_4B-1:0]			output_4B[0:NUM_PER_TYPE - 1];
+wire [width_2B-1:0]			output_2B[0:NUM_PER_TYPE - 1];
 wire [255:0]				output_md;
 
 
@@ -292,7 +293,7 @@ crossbar #(
 genvar gen_i;
 generate
     //initialize 8 6B containers 
-    for(gen_i = 7; gen_i >= 0; gen_i = gen_i - 1) begin
+    for(gen_i = NUM_PER_TYPE - 1; gen_i >= 0; gen_i = gen_i - 1) begin
         alu_1 #(
             .STAGE_ID(STAGE_ID),
             .ACTION_LEN(),
@@ -353,7 +354,7 @@ alu_2 #(
 );
 
 generate
-    for(gen_i = 6; gen_i >= 0; gen_i = gen_i - 1) begin
+    for(gen_i = NUM_PER_TYPE - 2; gen_i >= 0; gen_i = gen_i - 1) begin
 		alu_1 #(
 		    .STAGE_ID(STAGE_ID),
 		    .ACTION_LEN(),

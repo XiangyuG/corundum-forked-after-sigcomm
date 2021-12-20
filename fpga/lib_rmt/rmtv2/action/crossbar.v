@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
 module crossbar #(
     parameter STAGE_ID = 0,
-    parameter PHV_LEN = 48*8+32*8+16*8+256,
+    parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+    parameter PHV_LEN = 48*NUM_PER_TYPE+32*NUM_PER_TYPE+16*NUM_PER_TYPE+256,
     parameter ACT_LEN = 25,
     parameter width_2B = 16,
     parameter width_4B = 32,
@@ -41,9 +42,9 @@ module crossbar #(
 integer i;
 
 
-wire [width_6B-1:0]      cont_6B [0:7];
-wire [width_4B-1:0]      cont_4B [0:7];
-wire [width_2B-1:0]      cont_2B [0:7];
+wire [width_6B-1:0]      cont_6B [0:NUM_PER_TYPE - 1];
+wire [width_4B-1:0]      cont_4B [0:NUM_PER_TYPE - 1];
+wire [width_2B-1:0]      cont_2B [0:NUM_PER_TYPE - 1];
 
 wire [ACT_LEN-1:0]       sub_action [24:0];
 
@@ -59,24 +60,24 @@ assign cont_6B[2] = phv_in[PHV_LEN-1-5*width_6B -: width_6B];
 assign cont_6B[1] = phv_in[PHV_LEN-1-6*width_6B -: width_6B];
 assign cont_6B[0] = phv_in[PHV_LEN-1-7*width_6B -: width_6B];
 
-assign cont_4B[7] = phv_in[PHV_LEN-1-8*width_6B           -: width_4B];
-assign cont_4B[6] = phv_in[PHV_LEN-1-8*width_6B-  width_4B -: width_4B];
-assign cont_4B[5] = phv_in[PHV_LEN-1-8*width_6B-2*width_4B -: width_4B];
-assign cont_4B[4] = phv_in[PHV_LEN-1-8*width_6B-3*width_4B -: width_4B];
-assign cont_4B[3] = phv_in[PHV_LEN-1-8*width_6B-4*width_4B -: width_4B];
-assign cont_4B[2] = phv_in[PHV_LEN-1-8*width_6B-5*width_4B -: width_4B];
-assign cont_4B[1] = phv_in[PHV_LEN-1-8*width_6B-6*width_4B -: width_4B];
-assign cont_4B[0] = phv_in[PHV_LEN-1-8*width_6B-7*width_4B -: width_4B];
+assign cont_4B[7] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B           -: width_4B];
+assign cont_4B[6] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-  width_4B -: width_4B];
+assign cont_4B[5] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-2*width_4B -: width_4B];
+assign cont_4B[4] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-3*width_4B -: width_4B];
+assign cont_4B[3] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-4*width_4B -: width_4B];
+assign cont_4B[2] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-5*width_4B -: width_4B];
+assign cont_4B[1] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-6*width_4B -: width_4B];
+assign cont_4B[0] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-7*width_4B -: width_4B];
 
 
-assign cont_2B[7] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B            -: width_2B];
-assign cont_2B[6] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-  width_2B -: width_2B];
-assign cont_2B[5] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-2*width_2B -: width_2B];
-assign cont_2B[4] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-3*width_2B -: width_2B];
-assign cont_2B[3] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-4*width_2B -: width_2B];
-assign cont_2B[2] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-5*width_2B -: width_2B];
-assign cont_2B[1] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-6*width_2B -: width_2B];
-assign cont_2B[0] = phv_in[PHV_LEN-1-8*width_6B-8*width_4B-7*width_2B -: width_2B];
+assign cont_2B[7] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B            -: width_2B];
+assign cont_2B[6] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-  width_2B -: width_2B];
+assign cont_2B[5] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-2*width_2B -: width_2B];
+assign cont_2B[4] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-3*width_2B -: width_2B];
+assign cont_2B[3] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-4*width_2B -: width_2B];
+assign cont_2B[2] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-5*width_2B -: width_2B];
+assign cont_2B[1] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-6*width_2B -: width_2B];
+assign cont_2B[0] = phv_in[PHV_LEN-1-NUM_PER_TYPE*width_6B-NUM_PER_TYPE*width_4B-7*width_2B -: width_2B];
 
 // Tao: get action for each PHV container
 assign sub_action[24] = action_in[ACT_LEN*25-1-:ACT_LEN];					// 1st action
@@ -156,7 +157,7 @@ always @(posedge clk or negedge rst_n) begin
 						state <= HALT;
 					end
         		    //assign values one by one (of course need to consider act format)
-        		    for(i=7; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
         		        case(sub_action[16+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
         		            4'b0001, 4'b0010: begin
@@ -182,7 +183,7 @@ always @(posedge clk or negedge rst_n) begin
         		        endcase
         		    end
         		    //4B is a bit of differernt from 2B and 6B
-        		    for(i=7; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
         		        alu_in_4B_3[(i+1)*width_4B-1 -: width_4B] <= cont_4B[i];
         		        case(sub_action[8+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
@@ -224,7 +225,7 @@ always @(posedge clk or negedge rst_n) begin
         		            end
         		        endcase
         		    end
-        		    for(i=7; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
         		        casez(sub_action[i+1][24:21])
         		            //be noted that 2 ops need to be the same width
         		            4'b0001, 4'b0010: begin

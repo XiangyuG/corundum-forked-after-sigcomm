@@ -3,7 +3,8 @@ module key_extract #(
     parameter C_S_AXIS_DATA_WIDTH = 512,
     parameter C_S_AXIS_TUSER_WIDTH = 128,
     parameter STAGE_ID = 0,
-    parameter PHV_LEN = 48*8+32*8+16*8+256,
+    parameter NUM_PER_TYPE = 8,  // this represents how many containers per type
+    parameter PHV_LEN = 48*NUM_PER_TYPE+32*NUM_PER_TYPE+16*NUM_PER_TYPE+256,
     parameter KEY_LEN = 48*2+32*2+16*2+1,
     // format of KEY_OFF entry: |--3(6B)--|--3(6B)--|--3(4B)--|--3(4B)--|--3(2B)--|--3(2B)--|
     parameter KEY_OFF = (3+3)*3+20,
@@ -42,9 +43,9 @@ localparam WIDTH_6B = 48;
 //reg [KEY_LEN-1:0] key_out;
 
 //24 fields to be retrived from the pkt header
-reg [WIDTH_2B-1:0]		cont_2B [0:7];
-reg [WIDTH_4B-1:0]		cont_4B [0:7];
-reg [WIDTH_6B-1:0]		cont_6B [0:7];
+reg [WIDTH_2B-1:0]		cont_2B [0:NUM_PER_TYPE-1];
+reg [WIDTH_4B-1:0]		cont_4B [0:NUM_PER_TYPE-1];
+reg [WIDTH_6B-1:0]		cont_6B [0:NUM_PER_TYPE-1];
 
 wire [19:0]				com_op;
 wire [47:0]				com_op_1, com_op_2;
@@ -85,7 +86,7 @@ always @(posedge clk) begin
 		state <= IDLE_S;
 
 
-		for (i=0; i<8; i=i+1) begin
+		for (i=0; i<NUM_PER_TYPE; i=i+1) begin
 			cont_6B[i] <= 0;
 			cont_4B[i] <= 0;
 			cont_2B[i] <= 0;
@@ -115,23 +116,23 @@ always @(posedge clk) begin
 					cont_6B[1] <= phv_in[PHV_LEN-1-6*WIDTH_6B -: WIDTH_6B];
 					cont_6B[0] <= phv_in[PHV_LEN-1-7*WIDTH_6B -: WIDTH_6B];
 
-					cont_4B[7] <= phv_in[PHV_LEN-1-8*WIDTH_6B            -: WIDTH_4B];
-					cont_4B[6] <= phv_in[PHV_LEN-1-8*WIDTH_6B-  WIDTH_4B -: WIDTH_4B];
-					cont_4B[5] <= phv_in[PHV_LEN-1-8*WIDTH_6B-2*WIDTH_4B -: WIDTH_4B];
-					cont_4B[4] <= phv_in[PHV_LEN-1-8*WIDTH_6B-3*WIDTH_4B -: WIDTH_4B];
-					cont_4B[3] <= phv_in[PHV_LEN-1-8*WIDTH_6B-4*WIDTH_4B -: WIDTH_4B];
-					cont_4B[2] <= phv_in[PHV_LEN-1-8*WIDTH_6B-5*WIDTH_4B -: WIDTH_4B];
-					cont_4B[1] <= phv_in[PHV_LEN-1-8*WIDTH_6B-6*WIDTH_4B -: WIDTH_4B];
-					cont_4B[0] <= phv_in[PHV_LEN-1-8*WIDTH_6B-7*WIDTH_4B -: WIDTH_4B];
+					cont_4B[7] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B            -: WIDTH_4B];
+					cont_4B[6] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-  WIDTH_4B -: WIDTH_4B];
+					cont_4B[5] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-2*WIDTH_4B -: WIDTH_4B];
+					cont_4B[4] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-3*WIDTH_4B -: WIDTH_4B];
+					cont_4B[3] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-4*WIDTH_4B -: WIDTH_4B];
+					cont_4B[2] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-5*WIDTH_4B -: WIDTH_4B];
+					cont_4B[1] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-6*WIDTH_4B -: WIDTH_4B];
+					cont_4B[0] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-7*WIDTH_4B -: WIDTH_4B];
 
-					cont_2B[7] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B            -: WIDTH_2B];
-					cont_2B[6] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-  WIDTH_2B -: WIDTH_2B];
-					cont_2B[5] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-2*WIDTH_2B -: WIDTH_2B];
-					cont_2B[4] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-3*WIDTH_2B -: WIDTH_2B];
-					cont_2B[3] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-4*WIDTH_2B -: WIDTH_2B];
-					cont_2B[2] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-5*WIDTH_2B -: WIDTH_2B];
-					cont_2B[1] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-6*WIDTH_2B -: WIDTH_2B];
-					cont_2B[0] <= phv_in[PHV_LEN-1-8*WIDTH_6B-8*WIDTH_4B-7*WIDTH_2B -: WIDTH_2B];
+					cont_2B[7] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B            -: WIDTH_2B];
+					cont_2B[6] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-  WIDTH_2B -: WIDTH_2B];
+					cont_2B[5] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-2*WIDTH_2B -: WIDTH_2B];
+					cont_2B[4] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-3*WIDTH_2B -: WIDTH_2B];
+					cont_2B[3] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-4*WIDTH_2B -: WIDTH_2B];
+					cont_2B[2] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-5*WIDTH_2B -: WIDTH_2B];
+					cont_2B[1] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-6*WIDTH_2B -: WIDTH_2B];
+					cont_2B[0] <= phv_in[PHV_LEN-1-NUM_PER_TYPE*WIDTH_6B-NUM_PER_TYPE*WIDTH_4B-7*WIDTH_2B -: WIDTH_2B];
 
 					state <= CYCLE_1;
 				end
