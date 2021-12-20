@@ -101,16 +101,16 @@ wire [9:0] sub_parse_val_out_valid;
 wire [1:0] sub_parse_val_out_type [0:9];
 wire [2:0] sub_parse_val_out_seq [0:9];
 
-reg [47:0] val_6B [0:7];
-reg [31:0] val_4B [0:7];
-reg [15:0] val_2B [0:7];
-reg [47:0] val_6B_nxt [0:7];
-reg [31:0] val_4B_nxt [0:7];
-reg [15:0] val_2B_nxt [0:7];
+reg [47:0] val_6B [0:NUM_PER_TYPE - 1];
+reg [31:0] val_4B [0:NUM_PER_TYPE - 1];
+reg [15:0] val_2B [0:NUM_PER_TYPE - 1];
+reg [47:0] val_6B_nxt [0:NUM_PER_TYPE - 1];
+reg [31:0] val_4B_nxt [0:NUM_PER_TYPE - 1];
+reg [15:0] val_2B_nxt [0:NUM_PER_TYPE - 1];
 
-wire [47:0] val_6B_swapped [0:7];
-wire [31:0] val_4B_swapped [0:7];
-wire [15:0] val_2B_swapped [0:7];
+wire [47:0] val_6B_swapped [0:NUM_PER_TYPE - 1];
+wire [31:0] val_4B_swapped [0:NUM_PER_TYPE - 1];
+wire [15:0] val_2B_swapped [0:NUM_PER_TYPE - 1];
 
 `SWAP_BYTE_ORDER(0)
 `SWAP_BYTE_ORDER(1)
