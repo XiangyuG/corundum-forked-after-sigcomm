@@ -55,13 +55,13 @@ localparam width_4B = 32;
 localparam width_6B = 48;
 
 wire                        alu_in_valid;
-wire [width_6B*8-1:0]       alu_in_6B_1;
-wire [width_6B*8-1:0]       alu_in_6B_2;
-wire [width_4B*8-1:0]       alu_in_4B_1;
-wire [width_4B*8-1:0]       alu_in_4B_2;
-wire [width_4B*8-1:0]       alu_in_4B_3;
-wire [width_2B*8-1:0]       alu_in_2B_1;
-wire [width_2B*8-1:0]       alu_in_2B_2;
+wire [width_6B*NUM_PER_TYPE-1:0]       alu_in_6B_1;
+wire [width_6B*NUM_PER_TYPE-1:0]       alu_in_6B_2;
+wire [width_4B*NUM_PER_TYPE-1:0]       alu_in_4B_1;
+wire [width_4B*NUM_PER_TYPE-1:0]       alu_in_4B_2;
+wire [width_4B*NUM_PER_TYPE-1:0]       alu_in_4B_3;
+wire [width_2B*NUM_PER_TYPE-1:0]       alu_in_2B_1;
+wire [width_2B*NUM_PER_TYPE-1:0]       alu_in_2B_2;
 wire [255:0]                alu_in_phv_remain_data;
 wire [ACT_LEN*25-1:0]       alu_in_action;
 wire                        alu_in_action_valid;
@@ -301,7 +301,7 @@ generate
         )alu_1_6B(
             .clk(clk),
             .rst_n(rst_n),
-            .action_in(alu_in_action[(gen_i+8+8+1+1)*ACT_LEN-1 -: ACT_LEN]),
+            .action_in(alu_in_action[(gen_i + NUM_PER_TYPE + NUM_PER_TYPE + 1 + 1)*ACT_LEN-1 -: ACT_LEN]),
             .action_valid(alu_in_action_valid),
             .operand_1_in(alu_in_6B_1[(gen_i+1) * width_6B -1 -: width_6B]),
             .operand_2_in(alu_in_6B_2[(gen_i+1) * width_6B -1 -: width_6B]),
@@ -338,11 +338,11 @@ alu_2 #(
     .clk(clk),
     .rst_n(rst_n),
     //input from sub_action
-    .action_in(alu_in_action[(7+8+1+1)*ACT_LEN-1 -: ACT_LEN]),
+    .action_in(alu_in_action[(NUM_PER_TYPE + NUM_PER_TYPE + 1)*ACT_LEN-1 -: ACT_LEN]),
     .action_valid(alu_in_action_valid),
-    .operand_1_in(alu_in_4B_1[(7+1) * width_4B -1 -: width_4B]),
-    .operand_2_in(alu_in_4B_2[(7+1) * width_4B -1 -: width_4B]),
-    .operand_3_in(alu_in_4B_3[(7+1) * width_4B -1 -: width_4B]),
+    .operand_1_in(alu_in_4B_1[NUM_PER_TYPE*width_4B -1 -: width_4B]),
+    .operand_2_in(alu_in_4B_2[NUM_PER_TYPE*width_4B -1 -: width_4B]),
+    .operand_3_in(alu_in_4B_3[NUM_PER_TYPE*width_4B -1 -: width_4B]),
     .ready_out(alu_ready_out),
 	//
 	.page_tbl_out			(page_tbl_out),
@@ -362,7 +362,7 @@ generate
 		)alu_1_4B(
 		    .clk(clk),
 		    .rst_n(rst_n),
-		    .action_in(alu_in_action[(gen_i+8+1+1)*ACT_LEN-1 -: ACT_LEN]),
+		    .action_in(alu_in_action[(gen_i+NUM_PER_TYPE+1+1)*ACT_LEN-1 -: ACT_LEN]),
 		    .action_valid(alu_in_action_valid),
 		    .operand_1_in(alu_in_4B_1[(gen_i+1) * width_4B -1 -: width_4B]),
 		    .operand_2_in(alu_in_4B_2[(gen_i+1) * width_4B -1 -: width_4B]),
