@@ -23,13 +23,13 @@ module crossbar #(
 
     //output to the ALU
     output reg                    alu_in_valid,
-    output reg [width_6B*8-1:0]   alu_in_6B_1,
-    output reg [width_6B*8-1:0]   alu_in_6B_2,
-    output reg [width_4B*8-1:0]   alu_in_4B_1,
-    output reg [width_4B*8-1:0]   alu_in_4B_2,
-    output reg [width_4B*8-1:0]   alu_in_4B_3,
-    output reg [width_2B*8-1:0]   alu_in_2B_1,
-    output reg [width_2B*8-1:0]   alu_in_2B_2,
+    output reg [width_6B*NUM_PER_TYPE-1:0]   alu_in_6B_1,
+    output reg [width_6B*NUM_PER_TYPE-1:0]   alu_in_6B_2,
+    output reg [width_4B*NUM_PER_TYPE-1:0]   alu_in_4B_1,
+    output reg [width_4B*NUM_PER_TYPE-1:0]   alu_in_4B_2,
+    output reg [width_4B*NUM_PER_TYPE-1:0]   alu_in_4B_3,
+    output reg [width_2B*NUM_PER_TYPE-1:0]   alu_in_2B_1,
+    output reg [width_2B*NUM_PER_TYPE-1:0]   alu_in_2B_2,
     output reg [255:0]            phv_remain_data,
 
     //I have to delay action_in for ALUs for 1 cycle
