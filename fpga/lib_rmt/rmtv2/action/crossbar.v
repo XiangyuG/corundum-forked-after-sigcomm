@@ -157,7 +157,7 @@ always @(posedge clk or negedge rst_n) begin
 						state <= HALT;
 					end
         		    //assign values one by one (of course need to consider act format)
-        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE - 1; i>=0; i=i-1) begin
         		        case(sub_action[16+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
         		            4'b0001, 4'b0010: begin
@@ -183,7 +183,7 @@ always @(posedge clk or negedge rst_n) begin
         		        endcase
         		    end
         		    //4B is a bit of differernt from 2B and 6B
-        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE - 1; i>=0; i=i-1) begin
         		        alu_in_4B_3[(i+1)*width_4B-1 -: width_4B] <= cont_4B[i];
         		        case(sub_action[8+i+1][24:21])
         		            //be noted that 2 ops need to be the same width
@@ -225,7 +225,7 @@ always @(posedge clk or negedge rst_n) begin
         		            end
         		        endcase
         		    end
-        		    for(i=NUM_PER_TYPE; i>=0; i=i-1) begin
+        		    for(i=NUM_PER_TYPE - 1; i>=0; i=i-1) begin
         		        casez(sub_action[i+1][24:21])
         		            //be noted that 2 ops need to be the same width
         		            4'b0001, 4'b0010: begin
