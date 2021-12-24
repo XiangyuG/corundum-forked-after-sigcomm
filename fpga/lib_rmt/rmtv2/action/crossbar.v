@@ -132,13 +132,13 @@ always @(posedge clk or negedge rst_n) begin
         alu_in_valid <= 1'b0;
         phv_remain_data <= 256'b0;
         //reset all the outputs
-        alu_in_6B_1 <= 384'b0;
-        alu_in_6B_2 <= 384'b0;
-        alu_in_4B_1 <= 256'b0;
-        alu_in_4B_2 <= 256'b0;
-        alu_in_4B_3 <= 256'b0;
-        alu_in_2B_1 <= 128'b0;
-        alu_in_2B_2 <= 128'b0;
+        alu_in_6B_1 <= {width_6B*NUM_PER_TYPE{1'b0}};
+        alu_in_6B_2 <= {width_6B*NUM_PER_TYPE{1'b0}};
+        alu_in_4B_1 <= {width_4B*NUM_PER_TYPE{1'b0}};
+        alu_in_4B_2 <= {width_4B*NUM_PER_TYPE{1'b0}};
+        alu_in_4B_3 <= {width_4B*NUM_PER_TYPE{1'b0}};
+        alu_in_2B_1 <= {width_2B*NUM_PER_TYPE{1'b0}};
+        alu_in_2B_2 <= {width_2B*NUM_PER_TYPE{1'b0}};
        
 		state <= IDLE;
 		ready_out <= 1;
